@@ -102,10 +102,10 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
-am_aws_prog1_OBJECTS = src/main.$(OBJEXT)
+am_aws_prog1_OBJECTS = src/aws_prog1-main.$(OBJEXT)
 aws_prog1_OBJECTS = $(am_aws_prog1_OBJECTS)
 aws_prog1_LDADD = $(LDADD)
-aws_prog1_LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(aws_prog1_LDFLAGS) \
+aws_prog1_LINK = $(CCLD) $(aws_prog1_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -123,6 +123,10 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
+AM_V_lt = $(am__v_lt_@AM_V@)
+am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 AM_V_CC = $(am__v_CC_@AM_V@)
@@ -266,7 +270,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-aws_prog1_LDFLAGS = "-L=/usr/lib"
+aws_prog1_CPPFLAGS = "$(CPPFLAGS) -I$(srcdir)/src"
+aws_prog1_CFLAGS = "$(CFLAGS) -I$(srcdir)/src"
 aws_prog1_SOURCES = src/main.c
 all: all-am
 
@@ -353,7 +358,8 @@ src/$(am__dirstamp):
 src/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/$(DEPDIR)
 	@: > src/$(DEPDIR)/$(am__dirstamp)
-src/main.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/aws_prog1-main.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 
 aws-prog1$(EXEEXT): $(aws_prog1_OBJECTS) $(aws_prog1_DEPENDENCIES) $(EXTRA_aws_prog1_DEPENDENCIES) 
 	@rm -f aws-prog1$(EXEEXT)
@@ -366,7 +372,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/aws_prog1-main.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -383,6 +389,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+src/aws_prog1-main.o: src/main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(aws_prog1_CPPFLAGS) $(CPPFLAGS) $(aws_prog1_CFLAGS) $(CFLAGS) -MT src/aws_prog1-main.o -MD -MP -MF src/$(DEPDIR)/aws_prog1-main.Tpo -c -o src/aws_prog1-main.o `test -f 'src/main.c' || echo '$(srcdir)/'`src/main.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/aws_prog1-main.Tpo src/$(DEPDIR)/aws_prog1-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/main.c' object='src/aws_prog1-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(aws_prog1_CPPFLAGS) $(CPPFLAGS) $(aws_prog1_CFLAGS) $(CFLAGS) -c -o src/aws_prog1-main.o `test -f 'src/main.c' || echo '$(srcdir)/'`src/main.c
+
+src/aws_prog1-main.obj: src/main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(aws_prog1_CPPFLAGS) $(CPPFLAGS) $(aws_prog1_CFLAGS) $(CFLAGS) -MT src/aws_prog1-main.obj -MD -MP -MF src/$(DEPDIR)/aws_prog1-main.Tpo -c -o src/aws_prog1-main.obj `if test -f 'src/main.c'; then $(CYGPATH_W) 'src/main.c'; else $(CYGPATH_W) '$(srcdir)/src/main.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/aws_prog1-main.Tpo src/$(DEPDIR)/aws_prog1-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/main.c' object='src/aws_prog1-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(aws_prog1_CPPFLAGS) $(CPPFLAGS) $(aws_prog1_CFLAGS) $(CFLAGS) -c -o src/aws_prog1-main.obj `if test -f 'src/main.c'; then $(CYGPATH_W) 'src/main.c'; else $(CYGPATH_W) '$(srcdir)/src/main.c'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
