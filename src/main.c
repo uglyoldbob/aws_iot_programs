@@ -25,6 +25,7 @@
  * The application takes in the certificate path, host name , port and the number of times the publish should happen.
  *
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -42,7 +43,7 @@
 /**
  * @brief Default cert location
  */
-char certDirectory[PATH_MAX + 1] = "../../../certs";
+char certDirectory[PATH_MAX + 1] = ".";
 
 /**
  * @brief Default MQTT HOST URL is pulled from the aws_iot_config.h
@@ -57,7 +58,7 @@ uint32_t port = AWS_IOT_MQTT_PORT;
 /**
  * @brief This parameter will avoid infinite loop of publish and exit the program after certain number of publishes
  */
-uint32_t publishCount = 0;
+uint32_t publishCount = 3;
 
 void iot_subscribe_callback_handler(AWS_IoT_Client *pClient, char *topicName, uint16_t topicNameLen,
 									IoT_Publish_Message_Params *params, void *pData) {
@@ -129,7 +130,7 @@ void parseInputArgsForConnectParams(int argc, char **argv) {
 }
 
 int main(int argc, char **argv) {
-	bool infinitePublishFlag = true;
+	bool infinitePublishFlag = false;
 
 	char rootCA[PATH_MAX + 1];
 	char clientCRT[PATH_MAX + 1];
