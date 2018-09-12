@@ -1,5 +1,4 @@
 bin_PROGRAMS = aws-prog1
-dist_bin_SCRIPTS = scripts/iot-keygen.sh
 
 keyconfigdir = $(prefix)/etc/iot
 keyconfig_DATA = data/openssl.cnf
