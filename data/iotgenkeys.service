@@ -1,0 +1,18 @@
+[Unit]
+Description=IoT Key and CSR Generation
+ConditionPathExists=!/etc/iot/private.pem
+ConditionPathExists=!/etc/iot/csr.pem
+
+[Service]
+Environment="SYSCONFDIR=/etc/iot"
+ExecStart=/bin/sh -c "/bin/systemctl set-environment STUFF=$( /bin/cat /proc/sys/kernel/random/uuid )"
+ExecStart=/bin/mkdir -p $SYSCONFDIR
+ExecStart=/usr/bin/openssl genrsa -out ${SYSCONFDIR}/private.pem
+ExecStart=/bin/chmod 400 ${SYSCONFDIR}/private.pem
+ExecStart=/usr/bin/openssl req -config ${SYSCONFDIR}/openssl.cnf -key ${SYSCONFDIR}/private.pem -new -sha256 -out ${SYSCONFDIR}/csr.pem -subj "/C=US/ST=STATE/L=COMPANY/O=COMPANY/OU=./CN=generated-${STUFF}"
+ExecStart=/bin/chmod 444 ${SYSCONFDIR}/csr.pem
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

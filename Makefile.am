@@ -1,6 +1,11 @@
 bin_PROGRAMS = aws-prog1
+dist_bin_SCRIPTS = scripts/iot-keygen.sh
 
-aws_prog1_CPPFLAGS = "$(CPPFLAGS) -I$(srcdir)/src"
-aws_prog1_CFLAGS = "$(CFLAGS) -I$(srcdir)/src"
+keyconfigdir = $(prefix)/etc/iot
+keyconfig_DATA = data/openssl.cnf
+
+sysddir = $(prefix)/etc/systemd/system
+sysd_DATA = data/iotgenkeys.service
+
 aws_prog1_SOURCES = src/main.c
 
